@@ -63,9 +63,9 @@ func (m *mgrPythonPip) MgrDistStep(currentMetadata interface{}, nextMetadata int
 		username = %s
 		password = %s
 		`),
-		m.Config.GetString("pypi_repository"),
-		m.Config.GetString("pypi_username"),
-		m.Config.GetString("pypi_password"),
+		m.Config.GetString(config.PACKAGR_PYPI_REPOSITORY),
+		m.Config.GetString(config.PACKAGR_PYPI_USERNAME),
+		m.Config.GetString(config.PACKAGR_PYPI_PASSWORD),
 	)
 
 	if _, perr := pypircFile.Write([]byte(pypircContent)); perr != nil {

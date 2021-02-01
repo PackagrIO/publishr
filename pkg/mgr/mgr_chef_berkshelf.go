@@ -84,7 +84,7 @@ func (m *mgrChefBerkshelf) MgrDistStep(currentMetadata interface{}, nextMetadata
     		client_key "%s" # Define the path to wherever your client.pem file lives.  This is the key you generated when you signed up for a Chef account.
         	cookbook_path [ '%s' ] # Directory where the cookbook you're uploading resides.
 		`),
-		m.Config.GetString("chef_supermarket_username"),
+		m.Config.GetString(config.PACKAGR_CHEF_SUPERMARKET_USERNAME),
 		pemFile.Name(),
 		tmpParentPath,
 	)
@@ -105,7 +105,7 @@ func (m *mgrChefBerkshelf) MgrDistStep(currentMetadata interface{}, nextMetadata
 
 	cookbookDistCmd := fmt.Sprintf("knife cookbook site share %s %s -c %s",
 		nextMetadata.(*metadata.ChefMetadata).Name,
-		m.Config.GetString("chef_supermarket_type"),
+		m.Config.GetString(config.PACKAGR_CHEF_SUPERMARKET_TYPE),
 		knifeFile.Name(),
 	)
 

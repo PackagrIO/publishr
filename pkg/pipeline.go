@@ -8,7 +8,9 @@ import (
 	"github.com/packagrio/publishr/pkg/config"
 	"github.com/packagrio/publishr/pkg/mgr"
 	"log"
+	"os"
 	"path"
+	"path/filepath"
 )
 
 type Pipeline struct {
@@ -60,11 +62,15 @@ func (p *Pipeline) Start(config config.Interface) error {
 }
 
 func (p *Pipeline) PipelineInitStep() error {
+	//by default the current working directory is the local directory to execute in
+	cwdPath, _ := os.Getwd()
+	p.Data.GitLocalPath = cwdPath
+	p.Data.GitParentPath = filepath.Dir(cwdPath)
 
 	// start the source, and whatever work needs to be done there.
 	// MUST set options.GitParentPath
 	log.Println("pipeline_init_step")
-	scmImpl, serr := scm.Create(p.Config.GetString("scm"), p.Data)
+	scmImpl, serr := scm.Create(p.Config.GetString(config.PACKAGR_SCM), p.Data)
 	if serr != nil {
 		return serr
 	}
@@ -137,7 +143,7 @@ func (p *Pipeline) ScmRetrievePayloadStep() (*scm.Payload, error) {
 func (p *Pipeline) ParseRepoConfig() error {
 	log.Println("parse_repo_config")
 	// update the config with repo config file options
-	repoConfig := path.Join(p.Data.GitLocalPath, p.Config.GetString("engine_repo_config_path"))
+	repoConfig := path.Join(p.Data.GitLocalPath, p.Config.GetString(config.PACKAGR_ENGINE_REPO_CONFIG_PATH))
 	if utils.FileExists(repoConfig) {
 		if err := p.Config.ReadConfig(repoConfig); err != nil {
 			return errors.New("An error occured while parsing repository capsule.yml file")
@@ -162,13 +168,13 @@ func (p *Pipeline) ParseRepoConfig() error {
 func (p *Pipeline) MgrInitStep() error {
 	log.Println("mgr_init_step")
 	if p.Config.IsSet("mgr_type") {
-		manager, merr := mgr.Create(p.Config.GetString("mgr_type"), p.Data, p.Config, nil)
+		manager, merr := mgr.Create(p.Config.GetString(config.PACKAGR_MGR_TYPE), p.Data, p.Config, nil)
 		if merr != nil {
 			return merr
 		}
 		p.PackageManager = manager
 	} else {
-		manager, merr := mgr.Detect(p.Config.GetString("package_type"), p.Data, p.Config, nil)
+		manager, merr := mgr.Detect(p.Config.GetString(config.PACKAGR_PACKAGE_TYPE), p.Data, p.Config, nil)
 		if merr != nil {
 			return merr
 		}

@@ -61,7 +61,7 @@ func (m *mgrRubyBundler) MgrDistStep(currentMetadata interface{}, nextMetadata i
 		`---
 		:rubygems_api_key: %s
 		`),
-		m.Config.GetString("rubygems_api_key"),
+		m.Config.GetString(config.PACKAGR_RUBYGEMS_API_KEY),
 	)
 
 	if _, perr := credFile.Write([]byte(credContent)); perr != nil {

@@ -54,7 +54,7 @@ func (m *mgrNodeNpm) MgrDistStep(currentMetadata interface{}, nextMetadata inter
 	// write the .npmrc config jfile.
 	npmrcContent := fmt.Sprintf(
 		"//registry.npmjs.org/:_authToken=%s",
-		m.Config.GetString("npm_auth_token"),
+		m.Config.GetString(config.PACKAGR_NPM_AUTH_TOKEN),
 	)
 
 	if _, werr := npmrcFile.Write([]byte(npmrcContent)); werr != nil {

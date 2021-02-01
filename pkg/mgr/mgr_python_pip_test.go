@@ -6,6 +6,7 @@ import (
 	"github.com/golang/mock/gomock"
 	"github.com/packagrio/go-common/metadata"
 	"github.com/packagrio/go-common/pipeline"
+	"github.com/packagrio/publishr/pkg/config"
 	"github.com/packagrio/publishr/pkg/config/mock"
 	"github.com/packagrio/publishr/pkg/mgr"
 	"github.com/packagrio/publishr/pkg/mgr/mock"
@@ -78,11 +79,11 @@ func (suite *MgrPythonPipTestSuite) TestMgrPythonPip_MgrDistStep_WithoutCredenti
 func (suite *MgrPythonPipTestSuite) TestMgrPythonPip_MgrDistStep_WithCredentials() {
 	//setup
 	//suite.Config.EXPECT().SetDefault(gomock.Any(), gomock.Any()).MinTimes(1)
-	suite.Config.EXPECT().IsSet("pypi_username").MinTimes(1).Return(true)
-	suite.Config.EXPECT().IsSet("pypi_password").MinTimes(1).Return(true)
-	suite.Config.EXPECT().GetString("pypi_username").MinTimes(1).Return("capsulecd")
-	suite.Config.EXPECT().GetString("pypi_password").MinTimes(1).Return("capsulecd$23$")
-	suite.Config.EXPECT().GetString("pypi_repository").MinTimes(1).Return("https://test.pypi.org/legacy/") //using test repo
+	suite.Config.EXPECT().IsSet(config.PACKAGR_PYPI_USERNAME).MinTimes(1).Return(true)
+	suite.Config.EXPECT().IsSet(config.PACKAGR_PYPI_PASSWORD).MinTimes(1).Return(true)
+	suite.Config.EXPECT().GetString(config.PACKAGR_PYPI_USERNAME).MinTimes(1).Return("capsulecd")
+	suite.Config.EXPECT().GetString(config.PACKAGR_PYPI_PASSWORD).MinTimes(1).Return("capsulecd$23$")
+	suite.Config.EXPECT().GetString(config.PACKAGR_PYPI_REPOSITORY).MinTimes(1).Return("https://test.pypi.org/legacy/") //using test repo
 
 	//copy cookbook fixture into a temp directory.
 	parentPath, err := ioutil.TempDir("", "")
