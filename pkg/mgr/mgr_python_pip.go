@@ -45,7 +45,7 @@ func (m *mgrPythonPip) MgrValidateTools() error {
 	return nil
 }
 
-func (m *mgrPythonPip) MgrDistStep(currentMetadata interface{}, nextMetadata interface{}) error {
+func (m *mgrPythonPip) MgrDistStep(nextMetadata interface{}) error {
 	if !m.Config.IsSet("pypi_username") || !m.Config.IsSet("pypi_password") {
 		return errors.MgrDistCredentialsMissing("Cannot deploy python package to pypi/warehouse, credentials missing")
 	}

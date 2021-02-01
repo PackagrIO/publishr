@@ -52,11 +52,10 @@ func (suite *MgrGolangModTestSuite) TestMgrGolangModTestSuite_MgrDistStep_Withou
 	//suite.Config.EXPECT().SetDefault(gomock.Any(), gomock.Any()).MinTimes(1)
 	mgrGolangMod, err := mgr.Create("mod", suite.PipelineData, suite.Config, nil)
 	require.NoError(suite.T(), err)
-	currentVersion := new(metadata.GolangMetadata)
 	nextVersion := new(metadata.GolangMetadata)
 
 	//test
-	berr := mgrGolangMod.MgrDistStep(currentVersion, nextVersion)
+	berr := mgrGolangMod.MgrDistStep(nextVersion)
 
 	//assert
 	require.NoError(suite.T(), berr)

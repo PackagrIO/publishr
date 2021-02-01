@@ -55,11 +55,10 @@ func (suite *MgrChefBerkshelfTestSuite) TestMgrChefBerkshelfTestSuite_WithoutCre
 	mgrChefBerkshelf, err := mgr.Create("berkshelf", suite.PipelineData, suite.Config, nil)
 	require.NoError(suite.T(), err)
 
-	currentVersion := new(metadata.ChefMetadata)
 	nextVersion := new(metadata.ChefMetadata)
 
 	//test
-	berr := mgrChefBerkshelf.MgrDistStep(currentVersion, nextVersion)
+	berr := mgrChefBerkshelf.MgrDistStep(nextVersion)
 
 	//assert
 	require.Error(suite.T(), berr)

@@ -26,5 +26,5 @@ type Interface interface {
 	// USES pypi_username
 	// USES pypi_password
 	// USES rubygems_api_key
-	MgrDistStep(currentMetadata interface{}, nextMetadata interface{}) error
+	MgrDistStep(nextMetadata interface{}) error
 }

@@ -38,7 +38,7 @@ func (m *mgrGolangMod) MgrValidateTools() error {
 	return nil
 }
 
-func (m *mgrGolangMod) MgrDistStep(currentMetadata interface{}, nextMetadata interface{}) error {
+func (m *mgrGolangMod) MgrDistStep(nextMetadata interface{}) error {
 	// no real packaging for golang.
 	// libraries are stored in version control.
 	return nil

@@ -6,6 +6,7 @@ import (
 	"github.com/packagrio/go-common/pipeline"
 	"github.com/packagrio/go-common/scm"
 	"github.com/packagrio/publishr/pkg/config"
+	"github.com/packagrio/publishr/pkg/engine"
 	"github.com/packagrio/publishr/pkg/mgr"
 	"log"
 	"os"
@@ -17,6 +18,7 @@ type Pipeline struct {
 	Data           *pipeline.Data
 	Config         config.Interface
 	Scm            scm.Interface
+	Engine 			engine.Interface
 	PackageManager mgr.Interface
 }
 
@@ -196,7 +198,7 @@ func (p *Pipeline) MgrDistStep() error {
 	}
 
 	log.Println("mgr_dist_step")
-	if err := p.PackageManager.MgrDistStep(p.Engine.GetCurrentMetadata(), p.Engine.GetNextMetadata()); err != nil {
+	if err := p.PackageManager.MgrDistStep(p.Engine.GetNextMetadata()); err != nil {
 		return err
 	}
 

@@ -55,11 +55,10 @@ func (suite *MgrNodeNpmTestSuite) TestMgrNodeNpmTestSuite_MgrDistStep_WithoutCre
 	//suite.Config.EXPECT().SetDefault(gomock.Any(), gomock.Any()).MinTimes(1)
 	mgrNodeNpm, err := mgr.Create("npm", suite.PipelineData, suite.Config, nil)
 	require.NoError(suite.T(), err)
-	currentVersion := new(metadata.NodeMetadata)
 	nextVersion := new(metadata.NodeMetadata)
 
 	//test
-	berr := mgrNodeNpm.MgrDistStep(currentVersion, nextVersion)
+	berr := mgrNodeNpm.MgrDistStep(nextVersion)
 
 	//assert
 	require.Error(suite.T(), berr)

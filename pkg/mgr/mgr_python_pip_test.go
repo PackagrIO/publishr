@@ -61,11 +61,10 @@ func (suite *MgrPythonPipTestSuite) TestMgrPythonPip_MgrDistStep_WithoutCredenti
 	mgrPythonPip, err := mgr.Create("pip", suite.PipelineData, suite.Config, nil)
 	require.NoError(suite.T(), err)
 
-	currentVersion := new(metadata.PythonMetadata)
 	nextVersion := new(metadata.PythonMetadata)
 
 	//test
-	berr := mgrPythonPip.MgrDistStep(currentVersion, nextVersion)
+	berr := mgrPythonPip.MgrDistStep(nextVersion)
 
 	//assert
 	require.Error(suite.T(), berr)

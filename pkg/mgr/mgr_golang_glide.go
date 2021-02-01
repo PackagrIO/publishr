@@ -40,7 +40,7 @@ func (m *mgrGolangGlide) MgrValidateTools() error {
 	return nil
 }
 
-func (m *mgrGolangGlide) MgrDistStep(currentMetadata interface{}, nextMetadata interface{}) error {
+func (m *mgrGolangGlide) MgrDistStep(nextMetadata interface{}) error {
 	// no real packaging for golang.
 	// libraries are stored in version control.
 	return nil

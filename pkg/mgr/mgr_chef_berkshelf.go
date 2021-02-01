@@ -54,7 +54,7 @@ func (m *mgrChefBerkshelf) MgrValidateTools() error {
 	return nil
 }
 
-func (m *mgrChefBerkshelf) MgrDistStep(currentMetadata interface{}, nextMetadata interface{}) error {
+func (m *mgrChefBerkshelf) MgrDistStep(nextMetadata interface{}) error {
 	if !m.Config.IsSet("chef_supermarket_username") || !m.Config.IsSet("chef_supermarket_key") {
 		return errors.MgrDistCredentialsMissing("Cannot deploy cookbook to supermarket, credentials missing")
 	}

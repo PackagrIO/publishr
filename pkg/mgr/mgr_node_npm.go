@@ -43,7 +43,7 @@ func (m *mgrNodeNpm) MgrValidateTools() error {
 	return nil
 }
 
-func (m *mgrNodeNpm) MgrDistStep(currentMetadata interface{}, nextMetadata interface{}) error {
+func (m *mgrNodeNpm) MgrDistStep(nextMetadata interface{}) error {
 	if !m.Config.IsSet("npm_auth_token") {
 		return errors.MgrDistCredentialsMissing("cannot deploy page to npm, credentials missing")
 	}

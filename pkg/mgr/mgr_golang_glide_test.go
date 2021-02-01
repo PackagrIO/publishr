@@ -52,11 +52,10 @@ func (suite *MgrGolangGlideTestSuite) TestMgrGolangGlideTestSuite_MgrDistStep_Wi
 	//suite.Config.EXPECT().SetDefault(gomock.Any(), gomock.Any()).MinTimes(1)
 	mgrGolangDeg, err := mgr.Create("glide", suite.PipelineData, suite.Config, nil)
 	require.NoError(suite.T(), err)
-	currentVersion := new(metadata.GolangMetadata)
 	nextVersion := new(metadata.GolangMetadata)
 
 	//test
-	berr := mgrGolangDeg.MgrDistStep(currentVersion, nextVersion)
+	berr := mgrGolangDeg.MgrDistStep(nextVersion)
 
 	//assert
 	require.NoError(suite.T(), berr)

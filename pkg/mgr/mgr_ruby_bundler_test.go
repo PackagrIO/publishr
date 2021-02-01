@@ -54,11 +54,10 @@ func (suite *MgrRubyBundlerTestSuite) TestMgrRubyBundlerTestSuite_MgrDistStep_Wi
 
 	mgrRubyBundler, err := mgr.Create("bundler", suite.PipelineData, suite.Config, nil)
 	require.NoError(suite.T(), err)
-	currentVersion := new(metadata.RubyMetadata)
 	nextVersion := new(metadata.RubyMetadata)
 
 	//test
-	berr := mgrRubyBundler.MgrDistStep(currentVersion, nextVersion)
+	berr := mgrRubyBundler.MgrDistStep(nextVersion)
 
 	//assert
 	require.Error(suite.T(), berr)

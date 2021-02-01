@@ -47,7 +47,7 @@ func (m *mgrRubyBundler) MgrValidateTools() error {
 	return nil
 }
 
-func (m *mgrRubyBundler) MgrDistStep(currentMetadata interface{}, nextMetadata interface{}) error {
+func (m *mgrRubyBundler) MgrDistStep(nextMetadata interface{}) error {
 	if !m.Config.IsSet("rubygems_api_key") {
 		return errors.MgrDistCredentialsMissing("Cannot deploy package to rubygems, credentials missing")
 	}
