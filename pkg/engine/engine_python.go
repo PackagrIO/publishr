@@ -27,6 +27,8 @@ func (g *enginePython) Init(pipelineData *pipeline.Data, configData config.Inter
 
 	//set command defaults (can be overridden by repo/system configuration)
 	g.Config.SetDefault(config.PACKAGR_VERSION_METADATA_PATH, "VERSION")
+	g.Config.SetDefault(config.PACKAGR_PYPI_REPOSITORY, "https://upload.pypi.org/legacy/")
+
 	return nil
 }
 

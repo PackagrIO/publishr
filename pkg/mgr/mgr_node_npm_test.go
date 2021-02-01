@@ -6,6 +6,7 @@ import (
 	"github.com/golang/mock/gomock"
 	"github.com/packagrio/go-common/metadata"
 	"github.com/packagrio/go-common/pipeline"
+	"github.com/packagrio/publishr/pkg/config"
 	"github.com/packagrio/publishr/pkg/config/mock"
 	"github.com/packagrio/publishr/pkg/mgr"
 	"github.com/packagrio/publishr/pkg/mgr/mock"
@@ -49,7 +50,7 @@ func TestMgrNodeNpm_TestSuite(t *testing.T) {
 
 func (suite *MgrNodeNpmTestSuite) TestMgrNodeNpmTestSuite_MgrDistStep_WithoutCredentials() {
 	//setup
-	suite.Config.EXPECT().IsSet("npm_auth_token").Return(false).MinTimes(1)
+	suite.Config.EXPECT().IsSet(config.PACKAGR_NPM_AUTH_TOKEN).Return(false).MinTimes(1)
 
 	//suite.Config.EXPECT().SetDefault(gomock.Any(), gomock.Any()).MinTimes(1)
 	mgrNodeNpm, err := mgr.Create("npm", suite.PipelineData, suite.Config, nil)

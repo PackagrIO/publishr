@@ -2,7 +2,7 @@ package config_test
 
 import (
 	"github.com/analogj/go-util/utils"
-	"github.com/packagrio/releasr/pkg/config"
+	"github.com/packagrio/publishr/pkg/config"
 	"github.com/stretchr/testify/require"
 	"testing"
 )

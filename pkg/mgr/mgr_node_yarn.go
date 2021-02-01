@@ -43,7 +43,7 @@ func (m *mgrNodeYarn) MgrValidateTools() error {
 }
 
 func (m *mgrNodeYarn) MgrDistStep(currentMetadata interface{}, nextMetadata interface{}) error {
-	if !m.Config.IsSet("npm_auth_token") {
+	if !m.Config.IsSet(config.PACKAGR_NPM_AUTH_TOKEN) {
 		return errors.MgrDistCredentialsMissing("cannot deploy page to npm, credentials missing")
 	}
 
@@ -52,7 +52,8 @@ func (m *mgrNodeYarn) MgrDistStep(currentMetadata interface{}, nextMetadata inte
 
 	// write the .npmrc config jfile.
 	npmrcContent := fmt.Sprintf(
-		"//registry.npmjs.org/:_authToken=%s",
+		"//%s/:_authToken=%s",
+		m.Config.GetString(config.PACKAGR_NPM_REGISTRY),
 		m.Config.GetString(config.PACKAGR_NPM_AUTH_TOKEN),
 	)
 

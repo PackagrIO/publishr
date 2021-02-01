@@ -19,11 +19,13 @@ type engineNode struct {
 	NextMetadata *metadata.NodeMetadata
 }
 
-func (g *engineNode) Init(pipelineData *pipeline.Data, config config.Interface, sourceScm scm.Interface) error {
+func (g *engineNode) Init(pipelineData *pipeline.Data, configData config.Interface, sourceScm scm.Interface) error {
 	g.Scm = sourceScm
-	g.Config = config
+	g.Config = configData
 	g.PipelineData = pipelineData
 	g.NextMetadata = new(metadata.NodeMetadata)
+
+	g.Config.SetDefault(config.PACKAGR_NPM_REGISTRY, "registry.npmjs.org")
 
 	return nil
 }
