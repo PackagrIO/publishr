@@ -1,15 +1,12 @@
 package utils
 
 import (
-	stderrors "errors"
 	"fmt"
 	"github.com/analogj/go-util/utils"
 	"github.com/packagrio/go-common/errors"
 	"github.com/packagrio/go-common/pipeline"
 	git2go "gopkg.in/libgit2/git2go.v25"
-	"io/ioutil"
 	"log"
-	"net/http"
 	"os"
 	"path"
 	"path/filepath"
@@ -464,34 +461,6 @@ func GitCommit(repoPath string, message string, signature *git2go.Signature) err
 	return cerr
 }
 
-func GitTag(repoPath string, version string, message string, signature *git2go.Signature) (string, error) {
-	repo, oerr := git2go.OpenRepository(repoPath)
-	if oerr != nil {
-		return "", oerr
-	}
-	commitHead, herr := repo.Head()
-	if herr != nil {
-		return "", herr
-	}
-
-	commit, lerr := repo.LookupCommit(commitHead.Target())
-	if lerr != nil {
-		return "", lerr
-	}
-
-	//tagId, terr := repo.Tags.CreateLightweight(version, commit, false)
-	tagId, terr := repo.Tags.Create(version, commit, signature, fmt.Sprintf("(%s) %s", version, message))
-	if terr != nil {
-		return "", terr
-	}
-
-	tagObj, terr := repo.LookupTag(tagId)
-	if terr != nil {
-		return "", terr
-	}
-	return tagObj.TargetId().String(), terr
-}
-
 func GitPush(repoPath string, localBranch string, remoteBranch string, tagName string) error {
 	//- https://gist.github.com/danielfbm/37b0ca88b745503557b2b3f16865d8c3
 	//- https://stackoverflow.com/questions/37026399/git2go-after-createcommit-all-files-appear-like-being-added-for-deletion
@@ -589,18 +558,6 @@ func GitGenerateChangelog(repoPath string, baseSha string, headSha string) (stri
 	return markdown, nil
 }
 
-func GitGenerateGitIgnore(repoPath string, ignoreType string) error {
-	//https://github.com/GlenDC/go-gitignore/blob/master/gitignore/provider/github.go
-
-	gitIgnoreBytes, err := getGitIgnore(ignoreType)
-	if err != nil {
-		return err
-	}
-
-	gitIgnorePath := filepath.Join(repoPath, ".gitignore")
-	return ioutil.WriteFile(gitIgnorePath, gitIgnoreBytes, 0644)
-}
-
 func GitGetTagDetails(repoPath string, tagName string) (*pipeline.GitTagDetails, error) {
 	repo, oerr := git2go.OpenRepository(repoPath)
 	if oerr != nil {
@@ -645,15 +602,24 @@ func GitGetTagDetails(repoPath string, tagName string) (*pipeline.GitTagDetails,
 
 }
 
-//private methods
-
-func GitSignature(authorName string, authorEmail string) *git2go.Signature {
-	return &git2go.Signature{
-		Name:  authorName,
-		Email: authorEmail,
-		When:  time.Now(),
+func GitGetHeadCommit(repoPath string) (string, error) {
+	repo, oerr := git2go.OpenRepository(repoPath)
+	if oerr != nil {
+		return "", oerr
 	}
+	commitHead, herr := repo.Head()
+	if herr != nil {
+		return "", herr
+	}
+
+	commit, lerr := repo.LookupCommit(commitHead.Target())
+	if lerr != nil {
+		return "", lerr
+	}
+	return commit.Id().String(), nil
 }
+
+//private methods
 
 func cleanCommitMessage(commitMessage string) string {
 	commitMessage = strings.TrimSpace(commitMessage)
@@ -665,22 +631,6 @@ func cleanCommitMessage(commitMessage string) string {
 	commitMessage = strings.Replace(commitMessage, "\n", " ", -1)
 
 	return commitMessage
-}
-
-func getGitIgnore(languageName string) ([]byte, error) {
-	gitURL := fmt.Sprintf("https://raw.githubusercontent.com/github/gitignore/master/%s.gitignore", languageName)
-
-	resp, err := http.Get(gitURL)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != 200 {
-		return nil, stderrors.New(fmt.Sprintf("Could not find .gitignore for '%s'", languageName))
-	}
-
-	return ioutil.ReadAll(resp.Body)
 }
 
 //func gitRemoteCallbacks() *git.RemoteCallbacks {

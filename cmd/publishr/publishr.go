@@ -71,13 +71,6 @@ func main() {
 				},
 
 				Flags: []cli.Flag{
-					//TODO: currently not applicable
-					//&cli.StringFlag{
-					//	Name:  "runner",
-					//	Value: "default", // can be :none, :circleci or :shippable (check the readme for why other hosted providers arn't supported.)
-					//	Usage: "The cloud CI runner that is running this PR. (Used to determine the Environmental Variables to parse)",
-					//},
-
 					&cli.StringFlag{
 						Name:  "scm",
 						Value: "default",
@@ -89,7 +82,11 @@ func main() {
 						Value: "generic",
 						Usage: "The type of package being built.",
 					},
-
+					&cli.StringFlag{
+						Name:  "remote_branch",
+						Value: "master",
+						Usage: "The destination branch to push changes to",
+					},
 					&cli.BoolFlag{
 						Name:  "dry_run",
 						Usage: "When dry run is enabled, no data is written to file system",

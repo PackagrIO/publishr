@@ -2,23 +2,26 @@ package pkg
 
 import (
 	"errors"
+	"fmt"
 	"github.com/analogj/go-util/utils"
 	"github.com/packagrio/go-common/pipeline"
 	"github.com/packagrio/go-common/scm"
 	"github.com/packagrio/publishr/pkg/config"
 	"github.com/packagrio/publishr/pkg/engine"
 	"github.com/packagrio/publishr/pkg/mgr"
+	publishrUtils "github.com/packagrio/publishr/pkg/utils"
 	"log"
 	"os"
 	"path"
 	"path/filepath"
+	"time"
 )
 
 type Pipeline struct {
 	Data           *pipeline.Data
 	Config         config.Interface
 	Scm            scm.Interface
-	Engine 			engine.Interface
+	Engine         engine.Interface
 	PackageManager mgr.Interface
 }
 
@@ -40,6 +43,14 @@ func (p *Pipeline) Start(config config.Interface) error {
 		return err
 	}
 
+	if err := p.ValidateTools(); err != nil {
+		return err
+	}
+
+	if err := p.Engine.PopulateReleaseVersion(); err != nil {
+		return err
+	}
+
 	if err := p.MgrInitStep(); err != nil {
 		return err
 	}
@@ -52,6 +63,9 @@ func (p *Pipeline) Start(config config.Interface) error {
 		return err
 	}
 
+	if err := p.GitPushStep(); err != nil {
+		return err
+	}
 	if err := p.ScmPublishStep(); err != nil {
 		return err
 	}
@@ -78,6 +92,13 @@ func (p *Pipeline) PipelineInitStep() error {
 	}
 	p.Scm = scmImpl
 
+	//Generate a new instance of the engine
+	engineImpl, eerr := engine.Create(p.Config.GetString(config.PACKAGR_PACKAGE_TYPE), p.Data, p.Config, p.Scm)
+	if eerr != nil {
+		return eerr
+	}
+	p.Engine = engineImpl
+
 	return nil
 }
 
@@ -91,56 +112,6 @@ func (p *Pipeline) ScmRetrievePayloadStep() (*scm.Payload, error) {
 
 	return payload, nil
 }
-
-//func (p *Pipeline) ScmCheckoutPullRequestStep(payload *scm.Payload) error {
-//
-//	// PRE HOOK
-//	if err := p.RunHook("scm_checkout_pull_request_step.pre"); err != nil {
-//		return err
-//	}
-//
-//	if p.Config.IsSet("scm_checkout_pull_request_step.override") {
-//		if err := p.RunHook("scm_checkout_pull_request_step.override"); err != nil {
-//			return err
-//		}
-//	} else {
-//		log.Println("scm_checkout_pull_request_step")
-//		if err := p.Scm.CheckoutPullRequestPayload(payload); err != nil {
-//			return err
-//		}
-//	}
-//
-//	// POST HOOK
-//	if err := p.RunHook("scm_checkout_pull_request_step.post"); err != nil {
-//		return err
-//	}
-//	return nil
-//}
-
-//func (p *Pipeline) ScmCheckoutPushPayloadStep(payload *scm.Payload) error {
-//
-//	// PRE HOOK
-//	if err := p.RunHook("scm_checkout_push_payload_step.pre"); err != nil {
-//		return err
-//	}
-//
-//	if p.Config.IsSet("scm_checkout_push_payload_step.override") {
-//		if err := p.RunHook("scm_checkout_push_payload_step.override"); err != nil {
-//			return err
-//		}
-//	} else {
-//		log.Println("scm_checkout_push_payload_step")
-//		if err := p.Scm.CheckoutPushPayload(payload); err != nil {
-//			return err
-//		}
-//	}
-//
-//	// POST HOOK
-//	if err := p.RunHook("scm_checkout_push_payload_step.post"); err != nil {
-//		return err
-//	}
-//	return nil
-//}
 
 func (p *Pipeline) ParseRepoConfig() error {
 	log.Println("parse_repo_config")
@@ -165,6 +136,11 @@ func (p *Pipeline) ParseRepoConfig() error {
 		p.Data.ReleaseAssets = append(p.Data.ReleaseAssets, (*parsedAssets)...)
 	}
 	return nil
+}
+
+func (p *Pipeline) ValidateTools() error {
+	log.Println("validate_tools")
+	return p.Engine.ValidateTools()
 }
 
 func (p *Pipeline) MgrInitStep() error {
@@ -205,14 +181,55 @@ func (p *Pipeline) MgrDistStep() error {
 	return nil
 }
 
+func (p *Pipeline) GitPushStep() error {
+	log.Println("git_push_step")
+
+	perr := publishrUtils.GitPush(p.Data.GitLocalPath, p.Data.GitLocalBranch, p.Data.GitBaseInfo.Ref, fmt.Sprintf("v%s", p.Data.ReleaseVersion))
+	if perr != nil {
+		return perr
+	}
+	//sleep because github needs time to process the new tag.
+	time.Sleep(5 * time.Second)
+
+	// calculate the release sha
+	releaseCommit, err := publishrUtils.GitGetHeadCommit(p.Data.GitLocalPath)
+	if err != nil {
+		return err
+	}
+	p.Data.ReleaseCommit = releaseCommit
+	return nil
+}
+
 func (p *Pipeline) ScmPublishStep() error {
 	if p.Config.GetBool("scm_disable_publish") {
 		log.Println("skipping scm_publish_step.pre, scm_publish_step, scm_publish_step.post")
 		return nil
 	}
 
+	//get the release changelog
+	// logic is complicated.
+	// If this is a push we can only do a tag-tag Changelog
+	// If this is a pull request we can do either
+	// if disable_nearest_tag_changelog is true, we must attempt
+	var releaseBody string = ""
+	if p.Data.GitNearestTag != nil && !p.Config.GetBool("scm_disable_nearest_tag_changelog") {
+		releaseBody, _ = publishrUtils.GitGenerateChangelog(
+			p.Data.GitLocalPath,
+			p.Data.GitNearestTag.TagShortName,
+			p.Data.GitLocalBranch,
+		)
+	}
+	//fallback to using diff if pullrequest.
+	if p.Data.IsPullRequest && releaseBody == "" {
+		releaseBody, _ = publishrUtils.GitGenerateChangelog(
+			p.Data.GitLocalPath,
+			p.Data.GitBaseInfo.Sha,
+			p.Data.GitHeadInfo.Sha,
+		)
+	}
+
 	log.Println("scm_publish_step")
-	if err := p.Scm.Publish(); err != nil {
+	if err := p.Scm.Publish(releaseBody); err != nil {
 		return err
 	}
 

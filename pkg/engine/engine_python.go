@@ -44,8 +44,13 @@ func (g *enginePython) ValidateTools() error {
 	return nil
 }
 
-func (g *enginePython) PopulateNextMetadata() error {
-	return g.retrieveCurrentMetadata(g.PipelineData.GitLocalPath)
+func (g *enginePython) PopulateReleaseVersion() error {
+	err := g.retrieveCurrentMetadata(g.PipelineData.GitLocalPath)
+	if err != nil {
+		return err
+	}
+	g.PipelineData.ReleaseVersion = g.NextMetadata.Version
+	return nil
 }
 
 //private Helpers
