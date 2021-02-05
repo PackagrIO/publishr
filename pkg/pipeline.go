@@ -229,7 +229,7 @@ func (p *Pipeline) ScmPublishStep() error {
 	}
 
 	log.Println("scm_publish_step")
-	if err := p.Scm.Publish(releaseBody); err != nil {
+	if err := p.Scm.Publish(); err != nil {
 		return err
 	}
 

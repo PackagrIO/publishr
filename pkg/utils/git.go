@@ -342,6 +342,24 @@ func GitMergeRemoteBranch(repoPath string, localBranchName string, baseBranchNam
 
 }
 
+
+func GitFetchHeadCommit(repoPath string) (string, error) {
+	repo, oerr := git2go.OpenRepository(repoPath)
+	if oerr != nil {
+		return "", oerr
+	}
+	commitHead, herr := repo.Head()
+	if herr != nil {
+		return "", herr
+	}
+
+	commit, lerr := repo.LookupCommit(commitHead.Target())
+	if lerr != nil {
+		return "", lerr
+	}
+	return commit.Id().String(), nil
+}
+
 func GitCheckout(repoPath string, branchName string) error {
 	repo, oerr := git2go.OpenRepository(repoPath)
 	if oerr != nil {
