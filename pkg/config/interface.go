@@ -24,6 +24,8 @@ type Interface interface {
 
 const PACKAGR_PACKAGE_TYPE = "package_type"
 const PACKAGR_SCM = "scm"
+const PACKAGR_SCM_LOCAL_BRANCH = "scm_local_branch"
+const PACKAGR_SCM_REMOTE_BRANCH = "scm_remote_branch"
 const PACKAGR_ENGINE_REPO_CONFIG_PATH = "engine_repo_config_path"
 const PACKAGR_VERSION_METADATA_PATH = "version_metadata_path"
 const PACKAGR_GENERIC_VERSION_TEMPLATE = "generic_version_template"
@@ -36,4 +38,3 @@ const PACKAGR_PYPI_REPOSITORY = "pypi_repository"
 const PACKAGR_PYPI_USERNAME = "pypi_username"
 const PACKAGR_PYPI_PASSWORD = "pypi_password"
 const PACKAGR_RUBYGEMS_API_KEY = "rubygems_api_key"
-

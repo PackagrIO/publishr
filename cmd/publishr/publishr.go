@@ -57,6 +57,13 @@ func main() {
 					configuration.Set(config.PACKAGR_SCM, c.String("scm"))
 					configuration.Set(config.PACKAGR_PACKAGE_TYPE, c.String("package_type"))
 
+					if c.IsSet("local_branch") {
+						configuration.Set(config.PACKAGR_SCM_LOCAL_BRANCH, c.String("local_branch"))
+					}
+					if c.IsSet("remote_branch") {
+						configuration.Set(config.PACKAGR_SCM_REMOTE_BRANCH, c.String("remote_branch"))
+					}
+
 					fmt.Println("package type:", configuration.GetString(config.PACKAGR_PACKAGE_TYPE))
 					fmt.Println("scm:", configuration.GetString(config.PACKAGR_SCM))
 
@@ -83,6 +90,11 @@ func main() {
 						Usage: "The type of package being built.",
 					},
 					&cli.StringFlag{
+						Name:  "local_branch",
+						Value: "master",
+						Usage: "The local branch containing the changes",
+					},
+					&cli.StringFlag{
 						Name:  "remote_branch",
 						Value: "master",
 						Usage: "The destination branch to push changes to",
@@ -91,6 +103,10 @@ func main() {
 						Name:  "dry_run",
 						Usage: "When dry run is enabled, no data is written to file system",
 					},
+					//&cli.StringSliceFlag{
+					//	Name: "upload_artifact",
+					//	Usage: "Path to a release artifact"
+					//},
 				},
 			},
 		},

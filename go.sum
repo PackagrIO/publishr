@@ -149,6 +149,8 @@ github.com/mwitkow/go-conntrack v0.0.0-20161129095857-cc309e4a2223/go.mod h1:qRW
 github.com/oklog/ulid v1.3.1/go.mod h1:CirwcVhetQ6Lv90oh/F+FBtV6XMibvdAFo93nm5qn4U=
 github.com/packagrio/go-common v0.0.0-20200905211759-7bedcc5de2b9 h1:y8PgaL9Z8ueMuZICX4+Scpe2KTGmuKllUo8WK9Qs50E=
 github.com/packagrio/go-common v0.0.0-20200905211759-7bedcc5de2b9/go.mod h1:Ayf6caXlPa4tVRpI1xbvf4queA0rt3zbi8g9ef0ZDKA=
+github.com/packagrio/go-common v0.0.0-20210204224830-dec22583bcda h1:1GlgFGHVbskIRZ9EpKBxh1gr481PfqWXCqJu778z1OA=
+github.com/packagrio/go-common v0.0.0-20210204224830-dec22583bcda/go.mod h1:v8HlFUu0IEQogmiZJGu5JT+7OmYxIWF28/xHGwBhWlk=
 github.com/pascaldekloe/goe v0.0.0-20180627143212-57f6aae5913c/go.mod h1:lzWF7FIEvWOWxwDKqyGYQf6ZUaNfKdP144TG7ZOy1lc=
 github.com/pelletier/go-toml v1.2.0 h1:T5zMGML61Wp+FlcbWjRDT7yAxhJNAiPPLOFECq181zc=
 github.com/pelletier/go-toml v1.2.0/go.mod h1:5z9KED0ma1S8pY6P1sdut58dfprrGBbd/94hg7ilaic=
