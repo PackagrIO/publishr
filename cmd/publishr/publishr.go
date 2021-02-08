@@ -80,7 +80,7 @@ func main() {
 				Flags: []cli.Flag{
 					&cli.StringFlag{
 						Name:  "scm",
-						Value: "default",
+						Value: "generic",
 						Usage: "The scm for the code, for setting additional SCM specific metadata",
 					},
 
@@ -88,11 +88,6 @@ func main() {
 						Name:  "package_type",
 						Value: "generic",
 						Usage: "The type of package being built.",
-					},
-					&cli.StringFlag{
-						Name:  "local_branch",
-						Value: "master",
-						Usage: "The local branch containing the changes",
 					},
 					&cli.StringFlag{
 						Name:  "remote_branch",

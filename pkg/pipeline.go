@@ -2,19 +2,15 @@ package pkg
 
 import (
 	"errors"
-	"fmt"
 	"github.com/analogj/go-util/utils"
 	"github.com/packagrio/go-common/pipeline"
 	"github.com/packagrio/go-common/scm"
-	"github.com/packagrio/go-common/utils/git"
+	"github.com/packagrio/go-common/scm/models"
 	"github.com/packagrio/publishr/pkg/config"
 	"github.com/packagrio/publishr/pkg/engine"
 	"github.com/packagrio/publishr/pkg/mgr"
 	"log"
-	"os"
 	"path"
-	"path/filepath"
-	"time"
 )
 
 type Pipeline struct {
@@ -34,9 +30,14 @@ func (p *Pipeline) Start(config config.Interface) error {
 		return err
 	}
 
-	_, err := p.ScmRetrievePayloadStep()
+	payload, err := p.ScmRetrievePayloadStep()
 	if err != nil {
 		return err
+	}
+
+	perr := p.ScmPopulatePipelineData(payload)
+	if perr != nil {
+		return perr
 	}
 
 	if err := p.ParseRepoConfig(); err != nil {
@@ -75,13 +76,6 @@ func (p *Pipeline) Start(config config.Interface) error {
 }
 
 func (p *Pipeline) PipelineInitStep() error {
-	//by default the current working directory is the local directory to execute in
-	cwdPath, _ := os.Getwd()
-	p.Data.GitLocalPath = cwdPath
-	p.Data.GitParentPath = filepath.Dir(cwdPath)
-	p.Data.GitLocalBranch = p.Config.GetString(config.PACKAGR_SCM_LOCAL_BRANCH)
-	p.Data.GitRemoteBranch = p.Config.GetString(config.PACKAGR_SCM_REMOTE_BRANCH)
-
 	// start the source, and whatever work needs to be done there.
 	// MUST set options.GitParentPath
 	log.Println("pipeline_init_step")
@@ -101,7 +95,7 @@ func (p *Pipeline) PipelineInitStep() error {
 	return nil
 }
 
-func (p *Pipeline) ScmRetrievePayloadStep() (*scm.Payload, error) {
+func (p *Pipeline) ScmRetrievePayloadStep() (*models.Payload, error) {
 
 	log.Println("scm_retrieve_payload_step")
 	payload, perr := p.Scm.RetrievePayload()
@@ -110,6 +104,11 @@ func (p *Pipeline) ScmRetrievePayloadStep() (*scm.Payload, error) {
 	}
 
 	return payload, nil
+}
+func (p *Pipeline) ScmPopulatePipelineData(payload *models.Payload) error {
+
+	log.Println("scm_populate_pipeline_data_step")
+	return p.Scm.PopulatePipelineData(payload)
 }
 
 func (p *Pipeline) ParseRepoConfig() error {
