@@ -19,7 +19,6 @@ github.com/Masterminds/semver v1.5.0/go.mod h1:MB6lktGJrhw8PrUyiEoblNEGEQ+RzHPF0
 github.com/OneOfOne/xxhash v1.2.2/go.mod h1:HSdplMjZKSmBqAxg5vPj2TmRDmfkzw+cTzAElWljhcU=
 github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc/go.mod h1:LOuyumcjzFXgccqObfd/Ljyb9UuFJ6TxHnclSeseNhc=
 github.com/alecthomas/units v0.0.0-20151022065526-2efee857e7cf/go.mod h1:ybxpYRFXyAe+OPACYpWeL0wqObRcbAqCMya13uyzqw0=
-github.com/analogj/go-bitbucket v0.4.0/go.mod h1:MxqZJ1LIpr+9NqE3KloUc6eZYdSbfi0WP5aKc8Q5mDE=
 github.com/analogj/go-util v0.0.0-20200905200945-3b93d31215ae h1:FeNYRNhpaq8pejykK3rIVuRPpO4Sw1meCjacTPJabuE=
 github.com/analogj/go-util v0.0.0-20200905200945-3b93d31215ae/go.mod h1:lJQVqFKMV5/oDGYR2bra2OljcF3CvolAoyDRyOA4k4E=
 github.com/armon/circbuf v0.0.0-20150827004946-bbbad097214e/go.mod h1:3U/XgcO3hCbHZ8TKRvWD2dDTCfh9M9ya+I9JpbB7O8o=
@@ -115,7 +114,6 @@ github.com/jstemmer/go-junit-report v0.0.0-20190106144839-af01ea7f8024/go.mod h1
 github.com/jtolds/gls v4.20.0+incompatible h1:xdiiI2gbIgH/gLH7ADydsJ1uDOEzR8yvV7C0MuV77Wo=
 github.com/jtolds/gls v4.20.0+incompatible/go.mod h1:QJZ7F/aHp+rZTRtaJ1ow/lLfFfVYBRgL+9YlvaHOwJU=
 github.com/julienschmidt/httprouter v1.2.0/go.mod h1:SYymIcj16QtmaHHD7aYtjjsJG7VTCxuUUipMqKk8s4w=
-github.com/k0kubun/pp v3.0.1+incompatible/go.mod h1:GWse8YhT0p8pT4ir3ZgBbfZild3tgzSScAn6HmfYukg=
 github.com/kisielk/errcheck v1.1.0/go.mod h1:EZBBE59ingxPouuu3KfxchcWSUPOHkagtvWXihfKN4Q=
 github.com/kisielk/gotool v1.0.0/go.mod h1:XhKaO+MFFWcvkIS/tQcRk01m1F5IRFswLeQ+oQHNcck=
 github.com/konsorten/go-windows-terminal-sequences v1.0.1/go.mod h1:T0+1ngSBFLxvqU3pZ+m/2kptfBszLMUkC4ZK/EgS/cQ=
@@ -151,18 +149,10 @@ github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd/go.mod h1:6dJ
 github.com/modern-go/reflect2 v1.0.1/go.mod h1:bx2lNnkwVCuqBIxFjflWJWanXIb3RllmbCylyMrvgv0=
 github.com/mwitkow/go-conntrack v0.0.0-20161129095857-cc309e4a2223/go.mod h1:qRWi+5nqEBWmkhHvq77mSJWrCKwh8bxhgT7d/eI7P4U=
 github.com/oklog/ulid v1.3.1/go.mod h1:CirwcVhetQ6Lv90oh/F+FBtV6XMibvdAFo93nm5qn4U=
-github.com/packagrio/go-common v0.0.0-20200905211759-7bedcc5de2b9 h1:y8PgaL9Z8ueMuZICX4+Scpe2KTGmuKllUo8WK9Qs50E=
-github.com/packagrio/go-common v0.0.0-20200905211759-7bedcc5de2b9/go.mod h1:Ayf6caXlPa4tVRpI1xbvf4queA0rt3zbi8g9ef0ZDKA=
-github.com/packagrio/go-common v0.0.0-20210204224830-dec22583bcda h1:1GlgFGHVbskIRZ9EpKBxh1gr481PfqWXCqJu778z1OA=
-github.com/packagrio/go-common v0.0.0-20210204224830-dec22583bcda/go.mod h1:v8HlFUu0IEQogmiZJGu5JT+7OmYxIWF28/xHGwBhWlk=
-github.com/packagrio/go-common v0.0.0-20210208002723-29111b939683 h1:aIH5RzssA6v7PnUDIJYHa9fpLSQ2EObFQxu16sv11MM=
-github.com/packagrio/go-common v0.0.0-20210208002723-29111b939683/go.mod h1:v8HlFUu0IEQogmiZJGu5JT+7OmYxIWF28/xHGwBhWlk=
-github.com/packagrio/go-common v0.0.0-20210208022648-a6244e726914 h1:9DsTUKytL3FiEdBuBH1jXC5TXWp3oinOZheGfJP+aEk=
-github.com/packagrio/go-common v0.0.0-20210208022648-a6244e726914/go.mod h1:MqYLhRnroBE4sEqHQfRdBVlXkzXjXY+EU4dLROCadQA=
-github.com/packagrio/go-common v0.0.0-20210208024443-bbe261fc2a6d h1:4+Pq7s19Z4S/OKaJUAIGq11f56BKIu8qo61SWzCgt+w=
-github.com/packagrio/go-common v0.0.0-20210208024443-bbe261fc2a6d/go.mod h1:MqYLhRnroBE4sEqHQfRdBVlXkzXjXY+EU4dLROCadQA=
 github.com/packagrio/go-common v0.0.0-20210208030523-a546d49d56b6 h1:gxZbUjPo+GjGqd3cwsjI4Vd2RUEbZ4vz6b/2ftFRwhM=
 github.com/packagrio/go-common v0.0.0-20210208030523-a546d49d56b6/go.mod h1:MqYLhRnroBE4sEqHQfRdBVlXkzXjXY+EU4dLROCadQA=
+github.com/packagrio/go-common v0.0.0-20210208042630-f0ddf269baf4 h1:Jm63/j1ThJaonC1T0DZnHDUauHNt4JKYbeJiFpUWN5E=
+github.com/packagrio/go-common v0.0.0-20210208042630-f0ddf269baf4/go.mod h1:MqYLhRnroBE4sEqHQfRdBVlXkzXjXY+EU4dLROCadQA=
 github.com/pascaldekloe/goe v0.0.0-20180627143212-57f6aae5913c/go.mod h1:lzWF7FIEvWOWxwDKqyGYQf6ZUaNfKdP144TG7ZOy1lc=
 github.com/pelletier/go-toml v1.2.0 h1:T5zMGML61Wp+FlcbWjRDT7yAxhJNAiPPLOFECq181zc=
 github.com/pelletier/go-toml v1.2.0/go.mod h1:5z9KED0ma1S8pY6P1sdut58dfprrGBbd/94hg7ilaic=
@@ -186,7 +176,6 @@ github.com/russross/blackfriday/v2 v2.0.1 h1:lPqVAte+HuHNfhJ/0LC98ESWRz8afy9tM/0
 github.com/russross/blackfriday/v2 v2.0.1/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=
 github.com/ryanuber/columnize v0.0.0-20160712163229-9b3edd62028f/go.mod h1:sm1tb6uqfes/u+d4ooFouqFdy9/2g9QGwK3SQygK0Ts=
 github.com/sean-/seed v0.0.0-20170313163322-e2103e2c3529/go.mod h1:DxrIzT+xaE7yg65j358z/aeFdxmN0P9QXhEzd20vsDc=
-github.com/seborama/govcr v4.5.0+incompatible/go.mod h1:EgcISudCCYDLzbiAImJ8i7kk4+wTA44Kp+j4S0LhASI=
 github.com/shurcooL/sanitized_anchor_name v1.0.0 h1:PdmoCO6wvbs+7yrJyMORt4/BmY5IYyJwS/kOiWx8mHo=
 github.com/shurcooL/sanitized_anchor_name v1.0.0/go.mod h1:1NzhyTcUVG4SuEtjjoZeVRXNmyL/1OwPU0+IJeTBvfc=
 github.com/sirupsen/logrus v1.2.0/go.mod h1:LxeOpSwHxABJmUn/MG1IvRgCAasNZTLOkJPxbbu5VWo=
