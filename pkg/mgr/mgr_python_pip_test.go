@@ -106,7 +106,7 @@ func (suite *MgrPythonPipTestSuite) TestMgrPythonPip_MgrDistStep_WithCredentials
 	nextVersion := new(metadata.PythonMetadata)
 
 	//test
-	berr := mgrPythonPip.MgrDistStep(currentVersion, nextVersion)
+	berr := mgrPythonPip.MgrDistStep(nextVersion)
 
 	//assert
 	require.NoError(suite.T(), berr)

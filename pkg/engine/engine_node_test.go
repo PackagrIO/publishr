@@ -70,7 +70,7 @@ func TestEngineNode_TestSuite(t *testing.T) {
 
 func (suite *EngineNodeTestSuite) TestEngineNode_ValidateTools() {
 	//setup
-	//suite.Config.EXPECT().SetDefault(gomock.Any(), gomock.Any()).MinTimes(1)
+	suite.Config.EXPECT().SetDefault(gomock.Any(), gomock.Any()).MinTimes(1)
 	//suite.Config.EXPECT().GetBool("engine_disable_security_check").Return(true).MinTimes(1)
 	nodeEngine, err := engine.Create(engine.PACKAGR_ENGINE_TYPE_NODE, suite.PipelineData, suite.Config, suite.Scm)
 	require.NoError(suite.T(), err)
