@@ -24,7 +24,7 @@ func TestEnginePython_Create(t *testing.T) {
 	testConfig.Set(config.PACKAGR_SCM, "github")
 	testConfig.Set(config.PACKAGR_PACKAGE_TYPE, "python")
 	pipelineData := new(pipeline.Data)
-	githubScm, err := scm.Create("github", pipelineData)
+	githubScm, err := scm.Create("github", pipelineData, testConfig, nil)
 	require.NoError(t, err)
 
 	//test
