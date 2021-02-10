@@ -21,10 +21,10 @@ func TestEngineRuby_Create(t *testing.T) {
 	testConfig, err := config.Create()
 	require.NoError(t, err)
 
-	testConfig.Set(config.PACKAGR_SCM, "github")
+	testConfig.Set(config.PACKAGR_SCM, "generic")
 	testConfig.Set(config.PACKAGR_PACKAGE_TYPE, "ruby")
 	pipelineData := new(pipeline.Data)
-	githubScm, err := scm.Create("github", pipelineData, testConfig, nil)
+	githubScm, err := scm.Create("generic", pipelineData, testConfig, nil)
 	require.NoError(t, err)
 
 	//test
