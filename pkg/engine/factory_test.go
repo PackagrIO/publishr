@@ -73,7 +73,7 @@ func (suite *FactoryTestSuite) TestCreate_Golang() {
 
 func (suite *FactoryTestSuite) TestCreate_Node() {
 	//setup
-	//suite.Config.EXPECT().SetDefault(gomock.Any(), gomock.Any()).MinTimes(1)
+	suite.Config.EXPECT().SetDefault(gomock.Any(), gomock.Any()).MinTimes(1)
 
 	//test
 	testEngine, cerr := engine.Create("node", suite.PipelineData, suite.Config, suite.Scm)

@@ -102,7 +102,6 @@ func (suite *MgrPythonPipTestSuite) TestMgrPythonPip_MgrDistStep_WithCredentials
 	mgrPythonPip, err := mgr.Create("pip", suite.PipelineData, suite.Config, nil)
 	require.NoError(suite.T(), err)
 
-	currentVersion := new(metadata.PythonMetadata)
 	nextVersion := new(metadata.PythonMetadata)
 
 	//test
