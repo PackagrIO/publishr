@@ -90,6 +90,11 @@ func main() {
 						Usage: "The type of package being built.",
 					},
 					&cli.StringFlag{
+						Name:  "local_branch",
+						Value: "master",
+						Usage: "The local branch to containing cha changes to",
+					},
+					&cli.StringFlag{
 						Name:  "remote_branch",
 						Value: "master",
 						Usage: "The destination branch to push changes to",

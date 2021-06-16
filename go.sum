@@ -153,6 +153,8 @@ github.com/packagrio/go-common v0.0.0-20210208030523-a546d49d56b6 h1:gxZbUjPo+Gj
 github.com/packagrio/go-common v0.0.0-20210208030523-a546d49d56b6/go.mod h1:MqYLhRnroBE4sEqHQfRdBVlXkzXjXY+EU4dLROCadQA=
 github.com/packagrio/go-common v0.0.0-20210208042630-f0ddf269baf4 h1:Jm63/j1ThJaonC1T0DZnHDUauHNt4JKYbeJiFpUWN5E=
 github.com/packagrio/go-common v0.0.0-20210208042630-f0ddf269baf4/go.mod h1:MqYLhRnroBE4sEqHQfRdBVlXkzXjXY+EU4dLROCadQA=
+github.com/packagrio/go-common v0.0.0-20210616041057-c524d36c11d1 h1:EDYfF9pbtzDRhaIw5x8tVNVuostkbkpaMSyqjgLEFAc=
+github.com/packagrio/go-common v0.0.0-20210616041057-c524d36c11d1/go.mod h1:MqYLhRnroBE4sEqHQfRdBVlXkzXjXY+EU4dLROCadQA=
 github.com/pascaldekloe/goe v0.0.0-20180627143212-57f6aae5913c/go.mod h1:lzWF7FIEvWOWxwDKqyGYQf6ZUaNfKdP144TG7ZOy1lc=
 github.com/pelletier/go-toml v1.2.0 h1:T5zMGML61Wp+FlcbWjRDT7yAxhJNAiPPLOFECq181zc=
 github.com/pelletier/go-toml v1.2.0/go.mod h1:5z9KED0ma1S8pY6P1sdut58dfprrGBbd/94hg7ilaic=
