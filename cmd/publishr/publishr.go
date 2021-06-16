@@ -18,7 +18,7 @@ var goarch string
 func main() {
 	app := &cli.App{
 		Name:     "publishr",
-		Usage:    "Language agnostic tool to ",
+		Usage:    "Language agnostic tool to push changes to git repo, create release, attach artifacts, publish changelog",
 		Version:  version.VERSION,
 		Compiled: time.Now(),
 		Authors: []cli.Author{
