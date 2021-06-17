@@ -2,6 +2,7 @@ package pkg
 
 import (
 	"errors"
+	packagrErrors "github.com/packagrio/go-common/errors"
 	"github.com/analogj/go-util/utils"
 	"github.com/packagrio/go-common/pipeline"
 	"github.com/packagrio/go-common/scm"
@@ -201,7 +202,10 @@ func (p *Pipeline) ScmCleanupStep() error {
 
 	log.Println("scm_cleanup_step")
 	if err := p.Scm.Cleanup(); err != nil {
-		return err
+		if _, typeMatch := err.(packagrErrors.ScmCleanupFailed); !typeMatch {
+			//not a cleanup failure message (which we can ignore), so expose this.
+			return err
+		}
 	}
 
 	return nil
