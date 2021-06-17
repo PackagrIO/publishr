@@ -63,6 +63,9 @@ func main() {
 					if c.IsSet("remote_branch") {
 						configuration.Set(config.PACKAGR_SCM_REMOTE_BRANCH, c.String("remote_branch"))
 					}
+					if c.IsSet("upload_artifact") {
+						configuration.Set(config.PACKAGR_SCM_RELEASE_ASSETS, c.StringSlice("upload_artifact"))
+					}
 
 					fmt.Println("package type:", configuration.GetString(config.PACKAGR_PACKAGE_TYPE))
 					fmt.Println("scm:", configuration.GetString(config.PACKAGR_SCM))
@@ -103,10 +106,10 @@ func main() {
 						Name:  "dry_run",
 						Usage: "When dry run is enabled, no data is written to file system",
 					},
-					//&cli.StringSliceFlag{
-					//	Name: "upload_artifact",
-					//	Usage: "Path to a release artifact"
-					//},
+					&cli.StringSliceFlag{
+						Name: "upload_artifact",
+						Usage: "Path to a release artifact(s). Can be called multiple times. Use [FILE_PATH]:[UPLOADED_FILE_NAME] syntax to override destination file name",
+					},
 				},
 			},
 		},
