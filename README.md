@@ -6,6 +6,15 @@
   </a>
 </p>
 
+# Usage
+
+```
+cd /path/to/git/repo
+
+packagr-publishr start --scm github --package_type golang
+
+```
+
 # Logo
 
 - [link By Travis Avery, US](https://thenounproject.com/travisavery/collection/ui-ux-circles-solid/?i=2453722)
