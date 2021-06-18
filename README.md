@@ -6,6 +6,11 @@
   </a>
 </p>
 
+Language agnostic tool to push changes to git repo, create release, attach artifacts, publish changelog
+
+# Documentation
+Full documentation is available at [PackagrIO/docs](https://github.com/PackagrIO/docs)
+
 # Usage
 
 ```
