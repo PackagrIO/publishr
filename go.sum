@@ -155,6 +155,8 @@ github.com/packagrio/go-common v0.0.1 h1:ZKtEx6vkiYozQGPRK9MbmkbkuLxhebb58p+W2SB
 github.com/packagrio/go-common v0.0.1/go.mod h1:FP3yg500eI/khJdj+AjnbhlHdpsbbyT85hquoxe/N28=
 github.com/packagrio/go-common v0.0.2 h1:aP2iM01AZOBy8V/PoDLONzn5/1G/oz+H9lnwsHQewic=
 github.com/packagrio/go-common v0.0.2/go.mod h1:FP3yg500eI/khJdj+AjnbhlHdpsbbyT85hquoxe/N28=
+github.com/packagrio/go-common v0.0.3 h1:g34Xf88WRRGxHT8t1cCRfaDdUgEcxqNpYIm0a1HD6yE=
+github.com/packagrio/go-common v0.0.3/go.mod h1:FP3yg500eI/khJdj+AjnbhlHdpsbbyT85hquoxe/N28=
 github.com/pascaldekloe/goe v0.0.0-20180627143212-57f6aae5913c/go.mod h1:lzWF7FIEvWOWxwDKqyGYQf6ZUaNfKdP144TG7ZOy1lc=
 github.com/pelletier/go-toml v1.2.0 h1:T5zMGML61Wp+FlcbWjRDT7yAxhJNAiPPLOFECq181zc=
 github.com/pelletier/go-toml v1.2.0/go.mod h1:5z9KED0ma1S8pY6P1sdut58dfprrGBbd/94hg7ilaic=
