@@ -54,9 +54,13 @@ func main() {
 				Action: func(c *cli.Context) error {
 
 					configuration, _ := config.Create()
-					configuration.Set(config.PACKAGR_SCM, c.String("scm"))
-					configuration.Set(config.PACKAGR_PACKAGE_TYPE, c.String("package_type"))
 
+					if c.IsSet("scm") {
+						configuration.Set(config.PACKAGR_SCM, c.String("scm"))
+					}
+					if c.IsSet("package_type") {
+						configuration.Set(config.PACKAGR_PACKAGE_TYPE, c.String("package_type"))
+					}
 					if c.IsSet("local_branch") {
 						configuration.Set(config.PACKAGR_SCM_LOCAL_BRANCH, c.String("local_branch"))
 					}
@@ -107,7 +111,7 @@ func main() {
 						Usage: "When dry run is enabled, no data is written to file system",
 					},
 					&cli.StringSliceFlag{
-						Name: "upload_artifact",
+						Name:  "upload_artifact",
 						Usage: "Path to a release artifact(s). Can be called multiple times. Use [FILE_PATH]:[UPLOADED_FILE_NAME] syntax to override destination file name",
 					},
 				},
