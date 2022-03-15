@@ -2,8 +2,8 @@ package pkg
 
 import (
 	"errors"
-	packagrErrors "github.com/packagrio/go-common/errors"
 	"github.com/analogj/go-util/utils"
+	packagrErrors "github.com/packagrio/go-common/errors"
 	"github.com/packagrio/go-common/pipeline"
 	"github.com/packagrio/go-common/scm"
 	"github.com/packagrio/go-common/scm/models"
@@ -27,6 +27,10 @@ func (p *Pipeline) Start(config config.Interface) error {
 	p.Config = config
 	p.Data = new(pipeline.Data)
 
+	if err := p.ParseRepoConfig(); err != nil {
+		return err
+	}
+
 	if err := p.PipelineInitStep(); err != nil {
 		return err
 	}
@@ -39,10 +43,6 @@ func (p *Pipeline) Start(config config.Interface) error {
 	perr := p.ScmPopulatePipelineData(payload)
 	if perr != nil {
 		return perr
-	}
-
-	if err := p.ParseRepoConfig(); err != nil {
-		return err
 	}
 
 	if err := p.ValidateTools(); err != nil {
