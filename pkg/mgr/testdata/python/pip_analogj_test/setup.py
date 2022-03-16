@@ -31,6 +31,7 @@ setup(
 
     description='test package',
     long_description=long_description,
+    long_description_content_type="text/markdown",
 
     # The project's main homepage.
     url='https://github.com/AnalogJ/pip_analogj_test',
