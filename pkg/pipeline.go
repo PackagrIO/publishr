@@ -27,6 +27,10 @@ func (p *Pipeline) Start(config config.Interface) error {
 	p.Config = config
 	p.Data = new(pipeline.Data)
 
+	if err := p.ParseRepoConfig(); err != nil {
+		return err
+	}
+
 	if err := p.PipelineInitStep(); err != nil {
 		return err
 	}
