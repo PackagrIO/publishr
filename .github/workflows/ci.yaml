@@ -6,7 +6,7 @@ jobs:
   build-test:
     name: Build Test
     runs-on: ubuntu-latest
-    container: analogj/capsulecd-build
+    container: ghcr.io/packagrio/packagr-dev:master
     env:
       PROJECT_PATH: /go/src/github.com/packagrio/publishr
     strategy:
@@ -37,7 +37,7 @@ jobs:
     name: Test
     needs: build-test
     runs-on: ubuntu-latest
-    container: "packagrio/packagr:latest-${{ matrix.package_type }}"
+    container: "ghcr.io/packagrio/packagr:latest-${{ matrix.package_type }}"
 
     strategy:
       matrix:
@@ -63,7 +63,7 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    container: analogj/capsulecd-build
+    container: ghcr.io/packagrio/packagr-dev:master
     env:
       PROJECT_PATH: /go/src/github.com/packagrio/publishr
     steps:
