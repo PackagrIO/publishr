@@ -1,3 +1,2 @@
 vendor/
-packagr-publishr-linux-amd64
-packagr-publishr-darwin-amd64
+packagr-publishr-*
