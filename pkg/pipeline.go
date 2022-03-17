@@ -125,7 +125,7 @@ func (p *Pipeline) ParseRepoConfig() error {
 	repoConfig := path.Join(p.Data.GitLocalPath, p.Config.GetString(config.PACKAGR_ENGINE_REPO_CONFIG_PATH))
 	if utils.FileExists(repoConfig) {
 		if err := p.Config.ReadConfig(repoConfig); err != nil {
-			return errors.New("An error occured while parsing repository capsule.yml file")
+			return errors.New("An error occured while parsing repository packagr.yml file")
 		}
 	} else {
 		log.Println("No repo capsule.yml file found, using existing config.")
