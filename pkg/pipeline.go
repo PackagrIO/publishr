@@ -12,6 +12,8 @@ import (
 	"github.com/packagrio/publishr/pkg/mgr"
 	"log"
 	"path"
+	"os"
+	"path/filepath"
 )
 
 type Pipeline struct {
@@ -27,10 +29,6 @@ func (p *Pipeline) Start(config config.Interface) error {
 	p.Config = config
 	p.Data = new(pipeline.Data)
 
-	if err := p.ParseRepoConfig(); err != nil {
-		return err
-	}
-
 	if err := p.PipelineInitStep(); err != nil {
 		return err
 	}
@@ -43,10 +41,6 @@ func (p *Pipeline) Start(config config.Interface) error {
 	perr := p.ScmPopulatePipelineData(payload)
 	if perr != nil {
 		return perr
-	}
-
-	if err := p.ParseRepoConfig(); err != nil {
-		return err
 	}
 
 	if err := p.ValidateTools(); err != nil {
@@ -83,6 +77,15 @@ func (p *Pipeline) Start(config config.Interface) error {
 func (p *Pipeline) PipelineInitStep() error {
 	// start the source, and whatever work needs to be done there.
 	// MUST set options.GitParentPath
+	cwdPath, _ := os.Getwd()
+	p.Data.GitLocalPath = cwdPath
+	p.Data.GitParentPath = filepath.Dir(cwdPath)
+
+	if err := p.ParseRepoConfig(); err != nil {
+		return err
+	}
+
+
 	log.Println("pipeline_init_step")
 	scmImpl, serr := scm.Create(p.Config.GetString(config.PACKAGR_SCM), p.Data, p.Config, nil)
 	if serr != nil {
