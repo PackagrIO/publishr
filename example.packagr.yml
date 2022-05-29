@@ -1,0 +1,3 @@
+package_type: generic
+scm: default
+engine_repo_config_path: 'packagr.yml'
