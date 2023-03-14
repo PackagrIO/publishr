@@ -55,6 +55,11 @@ jobs:
 
           # restore modified dir to GH workspace.
           cp -arf $PROJECT_PATH/. $GITHUB_WORKSPACE/
+      - name: Archive
+        uses: actions/upload-artifact@v2
+        with:
+          name: publishr-linux-binary
+          path: ${{ env.PROJECT_PATH }}/packagr-publishr-linux-amd64
       - name: Commit Changes
         id: commit
         uses: packagrio/action-releasr-go@master
