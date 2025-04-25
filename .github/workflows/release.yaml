@@ -16,7 +16,7 @@ jobs:
       PROJECT_PATH: /go/src/github.com/packagrio/publishr
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Bump version
@@ -53,7 +53,7 @@ jobs:
           # restore modified dir to GH workspace.
           cp -arf $PROJECT_PATH/. $GITHUB_WORKSPACE/
       - name: Archive
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: publishr-linux-binary
           path: ${{ env.PROJECT_PATH }}/packagr-publishr-linux-amd64
